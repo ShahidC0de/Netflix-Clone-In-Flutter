@@ -19,34 +19,43 @@ class _UpcomingMovieCardState extends State<UpcomingMovieCard> {
     return FutureBuilder(
         future: widget.upcomingMovies,
         builder: (context, snapshot) {
-          var data = snapshot.data?.results;
-          return Column(
-            children: [
-              Text(
-                widget.headlineText,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
+          if (snapshot.hasData) {
+            var data = snapshot.data?.results;
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    widget.headlineText,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Expanded(
+                    child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        shrinkWrap: true,
+                        itemCount: data!.length,
+                        itemBuilder: (context, index) {
+                          return Container(
+                              padding: const EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(100),
+                              ),
+                              child: Image.network(
+                                  "$imageUrl${data[index].posterPath}"));
+                        }),
+                  ),
+                ],
               ),
-              const SizedBox(
-                height: 20,
-              ),
-              Expanded(
-                child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    shrinkWrap: true,
-                    itemCount: data!.length,
-                    itemBuilder: (context, index) {
-                      return Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: Image.network(
-                              "$imageUrl${data[index].posterPath}"));
-                    }),
-              ),
-            ],
-          );
+            );
+          } else {
+            return const SizedBox.shrink();
+          }
         });
   }
 }

@@ -24,4 +24,19 @@ class ApiServices {
     }
     throw Exception('error fetching the data');
   }
+
+  Future<UpcomingMovieModel> getNowPlayingMovies() async {
+    String endPointUrl = "movie/now_playing";
+    String url = "$baseUrl$endPointUrl$key";
+    try {
+      final response = await http.get(Uri.parse(url));
+      if (response.statusCode == 200) {
+        log("success");
+        return UpcomingMovieModel.fromJson(jsonDecode(response.body));
+      }
+    } catch (e) {
+      log(e.toString());
+    }
+    throw Exception('error fetching the noe_playing movies');
+  }
 }
