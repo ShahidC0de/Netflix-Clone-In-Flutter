@@ -23,9 +23,34 @@ class CustomCarousalSlider extends StatelessWidget {
             log(url);
             log("$imageUrl$url");
             return GestureDetector(
-                child: CachedNetworkImage(imageUrl: "$imageUrl$url"));
+                child: Column(
+              children: [
+                CachedNetworkImage(imageUrl: "$imageUrl$url"),
+                const SizedBox(
+                  height: 20,
+                ),
+                Text(
+                  moviesList.results[index].originalTitle,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ));
           },
-          options: CarouselOptions()),
+          options: CarouselOptions(
+            initialPage: 0, // starting pic,
+            height: (size.height * 0.33 < 300) ? 300 : size.height * 0.33,
+            autoPlay: true, //automatically scrolling
+            autoPlayInterval: const Duration(seconds: 10), // after 2 seconds
+            reverse: false, // when the pictures are end no reverse,
+            aspectRatio: 16 / 9, // screen size,
+            autoPlayAnimationDuration:
+                const Duration(milliseconds: 800), //how fast should image skip,
+            enlargeCenterPage:
+                true, //its like padding leaving a gap among pics,
+            scrollDirection: Axis.horizontal, // scrolling manually the picture,
+          )),
     );
   }
 }
