@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +19,9 @@ class CustomCarousalSlider extends StatelessWidget {
       child: CarouselSlider.builder(
           itemCount: moviesList.results.length,
           itemBuilder: (BuildContext context, int index, int realIndex) {
-            var url = moviesList.results[index].posterPath.toString();
+            var url = moviesList.results[index].backdropPath.toString();
+            log(url);
+            log("$imageUrl$url");
             return GestureDetector(
                 child: CachedNetworkImage(imageUrl: "$imageUrl$url"));
           },

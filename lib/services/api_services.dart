@@ -47,7 +47,7 @@ class ApiServices {
     try {
       final response = await http.get(Uri.parse(url));
       if (response.statusCode == 200) {
-        log("success");
+        log("top rated successed");
         return TopRatedMovieModel.fromJson(jsonDecode(response.body));
       }
     } catch (e) {

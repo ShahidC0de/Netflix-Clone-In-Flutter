@@ -70,7 +70,15 @@ class _HomeScreenState extends State<HomeScreen> {
               FutureBuilder(
                   future: topratedFuture,
                   builder: (context, snapshot) {
-                    return CustomCarousalSlider(moviesList: snapshot.data!);
+                    switch (snapshot.connectionState) {
+                      case ConnectionState.waiting:
+                        return const CircularProgressIndicator();
+                      case ConnectionState.done:
+                        var data = snapshot.data!;
+                        return CustomCarousalSlider(moviesList: data);
+                      default:
+                        return Text('default');
+                    }
                   }),
               SizedBox(
                 height: 220,
