@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:netflix_clone/commons/util.dart';
+import 'package:netflix_clone/models/top_rated_movie_model.dart';
 import 'package:netflix_clone/models/upcoming_movie_model.dart';
 import 'package:netflix_clone/services/api_services.dart';
+import 'package:netflix_clone/widgets/crousel_slide.dart';
 import 'package:netflix_clone/widgets/upcoming_movie_card.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -16,10 +18,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
   late Future<UpcomingMovieModel> upcomingFuture;
   late Future<UpcomingMovieModel> nowPlayingFuture;
+  late Future<TopRatedMovieModel> topratedFuture;
+
   @override
   void initState() {
     upcomingFuture = apiServices.getUpcomingMovies();
     nowPlayingFuture = apiServices.getNowPlayingMovies();
+    topratedFuture = apiServices.getTopRatedMovies();
 
     super.initState();
   }
@@ -62,6 +67,11 @@ class _HomeScreenState extends State<HomeScreen> {
         body: SingleChildScrollView(
           child: Column(
             children: [
+              FutureBuilder(
+                  future: topratedFuture,
+                  builder: (context, snapshot) {
+                    return CustomCarousalSlider(moviesList: snapshot.data!);
+                  }),
               SizedBox(
                 height: 220,
                 child: UpcomingMovieCard(

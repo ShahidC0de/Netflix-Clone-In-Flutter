@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:netflix_clone/commons/util.dart';
+import 'package:netflix_clone/models/top_rated_movie_model.dart';
 import 'package:netflix_clone/models/upcoming_movie_model.dart';
 import 'package:http/http.dart' as http;
 
@@ -38,5 +39,20 @@ class ApiServices {
       log(e.toString());
     }
     throw Exception('error fetching the noe_playing movies');
+  }
+
+  Future<TopRatedMovieModel> getTopRatedMovies() async {
+    String endPointUrl = "movie/top_rated";
+    String url = "$baseUrl$endPointUrl$key";
+    try {
+      final response = await http.get(Uri.parse(url));
+      if (response.statusCode == 200) {
+        log("success");
+        return TopRatedMovieModel.fromJson(jsonDecode(response.body));
+      }
+    } catch (e) {
+      log(e.toString());
+    }
+    throw Exception('error fetching the top_rated movies');
   }
 }

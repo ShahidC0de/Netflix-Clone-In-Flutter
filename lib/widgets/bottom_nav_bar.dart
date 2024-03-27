@@ -7,10 +7,11 @@ class BottomNavBar extends StatelessWidget {
   const BottomNavBar({super.key});
 
   @override
-  Widget build(BuildCont) {
+  Widget build(BuildContext context) {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
+        // ignore: avoid_unnecessary_containers
         bottomNavigationBar: Container(
           child: const TabBar(
             tabs: [
@@ -32,7 +33,7 @@ class BottomNavBar extends StatelessWidget {
             unselectedLabelColor: Color(0xff999999),
           ),
         ),
-        body: TabBarView(
+        body: const TabBarView(
           children: [
             HomeScreen(),
             SearchScreen(),

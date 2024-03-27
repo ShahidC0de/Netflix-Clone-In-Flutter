@@ -42,7 +42,7 @@ class _UpcomingMovieCardState extends State<UpcomingMovieCard> {
                         itemCount: data!.length,
                         itemBuilder: (context, index) {
                           return Container(
-                              padding: const EdgeInsets.all(10),
+                              padding: const EdgeInsets.all(6),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(100),
                               ),
