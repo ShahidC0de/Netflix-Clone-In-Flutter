@@ -28,9 +28,9 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
             style: TextStyle(
               color: Colors.white,
-              backgroundColor: Colors.grey.withOpacity(0.3),
             ),
-          )
+            backgroundColor: Colors.grey.withOpacity(0.3),
+          ),
         ],
       )),
     );

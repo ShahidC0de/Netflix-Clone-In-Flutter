@@ -65,7 +65,8 @@ class ApiServices {
       'Authorization':
           "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMzExNjljZDY3OTc5MGE2OTE0MjU2YzlhMTMyMjY5MiIsInN1YiI6IjY2MDA3MTk5MDQ3MzNmMDE3ZGVkZWJkZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.gPeYAFTteJTCONjzp09yY0WE351VTiCjbO3ng60o-8c"
     });
-    if (response == 200) {
+    // ignore: unrelated_type_equality_checks
+    if (response == '200') {
       return SearchMovieModel.fromJson(jsonDecode(response.body));
     }
     throw Exception("unable to get searched Movies");
