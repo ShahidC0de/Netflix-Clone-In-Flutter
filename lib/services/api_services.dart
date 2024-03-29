@@ -58,18 +58,23 @@ class ApiServices {
   }
 
   Future<SearchMovieModel> getSearchedMovies(String searchText) async {
-    String endPointUrl = "search/movie?quary=$searchText";
+    String endPointUrl =
+        "search/movie?query=$searchText"; // corrected parameter name
     String url = "$baseUrl$endPointUrl";
     log('search url is $url');
+
     final response = await http.get(Uri.parse(url), headers: {
       'Authorization':
           "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMzExNjljZDY3OTc5MGE2OTE0MjU2YzlhMTMyMjY5MiIsInN1YiI6IjY2MDA3MTk5MDQ3MzNmMDE3ZGVkZWJkZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.gPeYAFTteJTCONjzp09yY0WE351VTiCjbO3ng60o-8c"
     });
-    // ignore: unrelated_type_equality_checks
-    if (response == '200') {
-      log('success');
+
+    if (response.statusCode == 200) {
+      log('Success! Response Body: ${response.body}');
       return SearchMovieModel.fromJson(jsonDecode(response.body));
+    } else {
+      log('Error! Status Code: ${response.statusCode}, Response Body: ${response.body}');
+      throw Exception(
+          "Unable to get searched Movies. Status Code: ${response.statusCode}");
     }
-    throw Exception("unable to get searched Movies");
   }
 }

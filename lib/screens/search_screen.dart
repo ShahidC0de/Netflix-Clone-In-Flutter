@@ -17,9 +17,9 @@ class _SearchScreenState extends State<SearchScreen> {
   TextEditingController textController = TextEditingController();
   SearchMovieModel? searchMovieModel;
   void performSearch(String search) {
-    apiServices.getSearchedMovies(search).then((_result) {
+    apiServices.getSearchedMovies(search).then((result) {
       setState(() {
-        searchMovieModel = _result;
+        searchMovieModel = result;
       });
     });
   }
@@ -70,7 +70,8 @@ class _SearchScreenState extends State<SearchScreen> {
                           const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 3,
                         mainAxisSpacing: 15,
-                        crossAxisSpacing: 5,
+                        crossAxisSpacing: 10,
+                        childAspectRatio: 1.2 / 2,
                       ),
                       itemBuilder: (context, index) {
                         return Column(
@@ -80,6 +81,17 @@ class _SearchScreenState extends State<SearchScreen> {
                                   "$imageUrl${searchMovieModel!.results[index].backdropPath}",
                               height: 170,
                             ),
+                            SizedBox(
+                              width: 100,
+                              child: Text(
+                                searchMovieModel!.results[index].originalTitle,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                ),
+                              ),
+                            )
                           ],
                         );
                       })
