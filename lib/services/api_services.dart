@@ -59,7 +59,7 @@ class ApiServices {
 
   Future<SearchMovieModel> getSearchedMovies(String searchText) async {
     String endPointUrl = "search/movie?quary=$searchText";
-    String url = "$baseUrl$endPointUrl$key";
+    String url = "$baseUrl$endPointUrl";
     log('search url is $url');
     final response = await http.get(Uri.parse(url), headers: {
       'Authorization':
@@ -67,6 +67,7 @@ class ApiServices {
     });
     // ignore: unrelated_type_equality_checks
     if (response == '200') {
+      log('success');
       return SearchMovieModel.fromJson(jsonDecode(response.body));
     }
     throw Exception("unable to get searched Movies");
