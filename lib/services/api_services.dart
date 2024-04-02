@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:netflix_clone/commons/util.dart';
+import 'package:netflix_clone/models/popular_movies_model.dart';
 import 'package:netflix_clone/models/search_movie_model.dart';
 import 'package:netflix_clone/models/top_rated_movie_model.dart';
 import 'package:netflix_clone/models/upcoming_movie_model.dart';
@@ -61,7 +62,6 @@ class ApiServices {
     String endPointUrl =
         "search/movie?query=$searchText"; // corrected parameter name
     String url = "$baseUrl$endPointUrl";
-    log('search url is $url');
 
     final response = await http.get(Uri.parse(url), headers: {
       'Authorization':
@@ -76,5 +76,20 @@ class ApiServices {
       throw Exception(
           "Unable to get searched Movies. Status Code: ${response.statusCode}");
     }
+  }
+
+  Future<PopularMoviesModel> getPopularMovies() async {
+    String endPointUrl = "movie/popular";
+    String url = "$baseUrl$endPointUrl$key";
+    try {
+      final response = await http.get(Uri.parse(url));
+      if (response.statusCode == 200) {
+        log("popular movies recieved");
+        return PopularMoviesModel.fromJson(jsonDecode(response.body));
+      }
+    } catch (e) {
+      log(e.toString());
+    }
+    throw Exception('not recieved');
   }
 }
