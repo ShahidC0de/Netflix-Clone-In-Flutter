@@ -92,4 +92,33 @@ class ApiServices {
     }
     throw Exception('not recieved');
   }
+  // Future<PopularMoviesModel> getPopularMovies() async {
+  //   String endPointUrl = "movie/popular";
+  //   String url = "$baseUrl$endPointUrl$key";
+  //   try {
+  //     final response = await http.get(Uri.parse(url));
+  //     if (response.statusCode == 200) {
+  //       log("popular movies received");
+  //       // Check if response body is not null
+  //       if (response.body != null) {
+  //         // Decode JSON only if response body is not null
+  //         final decodedBody = jsonDecode(response.body);
+  //         // Check if decoded JSON is in the expected format (Map<String, dynamic>)
+  //         if (decodedBody is Map<String, dynamic>) {
+  //           return PopularMoviesModel.fromJson(decodedBody);
+  //         } else {
+  //           throw Exception('Invalid response format');
+  //         }
+  //       } else {
+  //         throw Exception('Response body is null');
+  //       }
+  //     } else {
+  //       throw Exception(
+  //           'Failed to fetch popular movies: ${response.statusCode}');
+  //     }
+  //   } catch (e) {
+  //     log(e.toString());
+  //     throw Exception('Failed to fetch popular movies: $e');
+  //   }
+  // }
 }
