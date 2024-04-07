@@ -104,7 +104,9 @@ class _SearchScreenState extends State<SearchScreen> {
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      const DetailsScreen()));
+                                                      DetailsScreen(
+                                                        movieId: data[index].id,
+                                                      )));
                                         },
                                         child: Container(
                                             height: 150,
