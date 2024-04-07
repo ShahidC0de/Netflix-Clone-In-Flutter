@@ -27,7 +27,7 @@ class CustomCarousalSlider extends StatelessWidget {
               children: [
                 CachedNetworkImage(imageUrl: "$imageUrl$url"),
                 const SizedBox(
-                  height: 20,
+                  height: 18,
                 ),
                 Text(
                   moviesList.results[index].originalTitle,

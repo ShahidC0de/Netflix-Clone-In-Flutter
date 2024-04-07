@@ -196,6 +196,7 @@ class Result {
       };
 }
 
+// ignore: constant_identifier_names
 enum OriginalLanguage { EN, NO, PT, ZH }
 
 final originalLanguageValues = EnumValues({
