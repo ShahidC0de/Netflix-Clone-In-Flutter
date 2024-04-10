@@ -169,10 +169,21 @@ class _SearchScreenState extends State<SearchScreen> {
                                     "netflix.png",
                                     height: 170,
                                   )
-                                : CachedNetworkImage(
-                                    imageUrl:
-                                        "$imageUrl${searchMovieModel!.results[index].backdropPath}",
-                                    height: 170,
+                                : InkWell(
+                                    onTap: () {
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                          builder: (context) => DetailsScreen(
+                                              movieId: searchMovieModel!
+                                                  .results[index].id),
+                                        ),
+                                      );
+                                    },
+                                    child: CachedNetworkImage(
+                                      imageUrl:
+                                          "$imageUrl${searchMovieModel!.results[index].backdropPath}",
+                                      height: 170,
+                                    ),
                                   ),
                             SizedBox(
                               width: 100,

@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:netflix_clone/commons/util.dart';
 import 'package:netflix_clone/models/movie_detail_model.dart';
 import 'package:netflix_clone/models/popular_movies_model.dart';
+import 'package:netflix_clone/models/recommend_movie_model.dart';
 import 'package:netflix_clone/models/search_movie_model.dart';
 import 'package:netflix_clone/models/top_rated_movie_model.dart';
 import 'package:netflix_clone/models/upcoming_movie_model.dart';
@@ -97,11 +98,29 @@ class ApiServices {
   Future<MovieDetailModel> getMovieDetails(int movieId) async {
     String endPointUrl = "movie/$movieId";
     String url = "$baseUrl$endPointUrl$key";
+    log(url);
     try {
       final response = await http.get(Uri.parse(url));
       if (response.statusCode == 200) {
         log('details recieved');
         return MovieDetailModel.fromJson(jsonDecode(response.body));
+      }
+    } catch (e) {
+      log(e.toString());
+    }
+    throw Exception();
+  }
+
+  Future<RecommendMovieModel> getrecommendedMovies(int movieId) async {
+    String endPointUrl = "movie/$movieId/recommendations";
+    String url = "$baseUrl$endPointUrl$key";
+    log("url is $url");
+    log(url);
+    try {
+      final response = await http.get(Uri.parse(url));
+      if (response.statusCode == 200) {
+        log('recommended movies recieved');
+        return RecommendMovieModel.fromJson(jsonDecode(response.body));
       }
     } catch (e) {
       log(e.toString());
