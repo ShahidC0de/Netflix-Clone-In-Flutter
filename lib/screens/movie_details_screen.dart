@@ -80,7 +80,11 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(details.originalTitle),
+                      Text(
+                        details.originalTitle,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ],
                   ),
                   const SizedBox(
@@ -97,13 +101,15 @@ class _DetailsScreenState extends State<DetailsScreen> {
                           ),
                         ),
                         const SizedBox(
-                          width: 30,
+                          width: 10,
                         ),
                         Text(
                           genreText,
                           style: const TextStyle(
                             color: Colors.grey,
                           ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ],
                     ),

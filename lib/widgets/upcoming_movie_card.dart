@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:netflix_clone/commons/util.dart';
 import 'package:netflix_clone/models/upcoming_movie_model.dart';
+import 'package:netflix_clone/screens/movie_details_screen.dart';
 
 class UpcomingMovieCard extends StatefulWidget {
   final Future<UpcomingMovieModel> upcomingMovies;
@@ -46,8 +47,18 @@ class _UpcomingMovieCardState extends State<UpcomingMovieCard> {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(100),
                               ),
-                              child: Image.network(
-                                  "$imageUrl${data[index].posterPath}"));
+                              child: InkWell(
+                                onTap: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) => DetailsScreen(
+                                          movieId: data[index].id),
+                                    ),
+                                  );
+                                },
+                                child: Image.network(
+                                    "$imageUrl${data[index].posterPath}"),
+                              ));
                         }),
                   ),
                 ],
