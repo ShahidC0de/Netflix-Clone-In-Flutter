@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:netflix_clone/commons/util.dart';
 import 'package:netflix_clone/models/upcoming_movie_model.dart';
 import 'package:netflix_clone/screens/movie_details_screen.dart';
